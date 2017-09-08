@@ -285,6 +285,15 @@ namespace Tests.Database
 
         #region Managed Tests
 
+        [Test]
+        public void AAAAAAA()
+        {
+            var a = Realms.ListHandle.AAAAA();
+			var b = Realms.ListHandle.BBBBBB();
+
+            var c = a == b;
+		}
+
         [TestCaseSource(nameof(BooleanTestValues))]
         public void Test_ManagedBooleanList(bool[] values)
         {

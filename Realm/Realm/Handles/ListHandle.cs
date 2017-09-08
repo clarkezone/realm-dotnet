@@ -28,6 +28,9 @@ namespace Realms
         {
             #region add
 
+            [DllImport(InteropConfig.DLL_NAME, EntryPoint = "AAAAA", CallingConvention = CallingConvention.Cdecl)]
+            public static extern IntPtr aaaaaa();
+
             [DllImport(InteropConfig.DLL_NAME, EntryPoint = "list_add_object", CallingConvention = CallingConvention.Cdecl)]
             public static extern void add_object(ListHandle listHandle, ObjectHandle objectHandle, out NativeException ex);
 
@@ -122,6 +125,16 @@ namespace Realms
 
             [DllImport(InteropConfig.DLL_NAME, EntryPoint = "list_get_thread_safe_reference", CallingConvention = CallingConvention.Cdecl)]
             public static extern ThreadSafeReferenceHandle get_thread_safe_reference(ListHandle listHandle, out NativeException ex);
+        }
+
+        public static int AAAAA()
+        {
+            return (int)NativeMethods.aaaaaa();
+        }
+
+        public static unsafe int BBBBBB()
+        {
+            return sizeof(PrimitiveValue);
         }
 
         public override bool IsValid

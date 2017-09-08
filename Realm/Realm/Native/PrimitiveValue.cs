@@ -29,25 +29,25 @@ namespace Realms.Native
     internal struct PrimitiveValue
     {
         [FieldOffset(0)]
-        [MarshalAs(UnmanagedType.U1)]
-        internal PropertyType type;
-
-        [FieldOffset(1)]
-        [MarshalAs(UnmanagedType.I1)]
-        internal bool has_value;
-
-        [FieldOffset(8)]
         [MarshalAs(UnmanagedType.I1)]
         internal bool bool_value;
 
-        [FieldOffset(8)]
+        [FieldOffset(0)]
         internal long int_value;
 
-        [FieldOffset(8)]
+        [FieldOffset(0)]
         internal float float_value;
 
-        [FieldOffset(8)]
+        [FieldOffset(0)]
         internal double double_value;
+
+        [FieldOffset(8)]
+        [MarshalAs(UnmanagedType.U1)]
+        internal PropertyType type;
+
+        [FieldOffset(9)]
+        [MarshalAs(UnmanagedType.I1)]
+        internal bool has_value;
 
         public static PrimitiveValue Create<T>(T value, PropertyType type)
         {

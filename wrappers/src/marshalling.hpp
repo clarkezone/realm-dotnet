@@ -31,15 +31,15 @@ namespace binding {
 
 struct PrimitiveValue
 {
-    realm::PropertyType type;
-    bool has_value;
-    
     union {
         bool bool_value;
         int64_t int_value;
         float float_value;
         double double_value;
     } value;
+    
+    realm::PropertyType type;
+    bool has_value;    
 };
     
 template<typename Collection>

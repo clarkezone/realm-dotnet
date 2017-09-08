@@ -60,6 +60,11 @@ inline size_t find(List* list, T value, NativeException::Marshallable& ex)
 
 extern "C" {
   
+    REALM_EXPORT size_t AAAAA()
+    {
+        return sizeof(PrimitiveValue);
+    }
+    
 REALM_EXPORT void list_add_object(List* list, const Object& object_ptr, NativeException::Marshallable& ex)
 {
     handle_errors(ex, [&]() {
