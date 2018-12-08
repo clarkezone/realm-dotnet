@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Diagnostics;
+using System.Windows.Input;
 using Realms;
 using Xamarin.Forms;
 
@@ -19,6 +20,10 @@ namespace QuickJournal
             Entry = entry;
             _transaction = transaction;
             SaveCommand = new Command(Save);
+            //entry.PropertyChanged += (sender, e) => {
+
+            //    Debug.WriteLine("sss");
+            //};
         }
 
         private void Save()

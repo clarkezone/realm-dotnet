@@ -32,7 +32,17 @@ namespace QuickJournal
         public JournalEntriesViewModel()
         {
             AddEntryCommand = new Command(AddEntry);
-            DeleteEntryCommand = new Command<JournalEntry>(DeleteEntry);
+            DeleteEntryCommand = new Command<JournalEntry>(DeleteEntry); 
+
+
+            //Use Local Database
+
+            //_realm = Realm.GetInstance();
+            //Entries = _realm.All<JournalEntry>();
+            //RaisePropertyChanged(nameof(Entries));
+
+
+            //Use data sync
 
             GetRealmInstance().ContinueWith(task =>
             {
@@ -51,15 +61,20 @@ namespace QuickJournal
 
         private async Task GetRealmInstance()
         {
-            //TODO: supply serverip
-            var serverip = <serverip>;
+            var serverip = "13.88.24.115";
 
+            if (User.AllLoggedIn.Count() > 0)
+            {
+                foreach (var u in User.AllLoggedIn.AsEnumerable())
+                {
+                    u.LogOut();
+                }
+            }
             User user = User.Current;
 
             if (user == null)
             {
-                //TODO: supply UN and PW
-                var creds = Credentials.UsernamePassword(<un>, <pw>, false);
+                var creds = Credentials.UsernamePassword("bar@bar.com", "test2", false);
 
                 var authUri = new Uri($"http://{serverip}:9080");
 
@@ -76,7 +91,7 @@ namespace QuickJournal
 
             var config = new SyncConfiguration(user, new Uri($"realm://{serverip}:9080/~/journal")); //~ indicates per user realm
 
-            _realm = await Realm.GetInstanceAsync(config);
+            _realm = Realm.GetInstance(config);
 
             Entries = _realm.All<JournalEntry>();
             RaisePropertyChanged(nameof(Entries));
